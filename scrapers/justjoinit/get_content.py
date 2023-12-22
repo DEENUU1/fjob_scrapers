@@ -3,6 +3,7 @@ import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+from selenium.webdriver.chrome.service import Service
 
 
 logging.basicConfig(
@@ -12,29 +13,29 @@ logging.basicConfig(
 )
 
 CATEGORIES = [
-    "javascript",
-    "html",
-    "php",
-    "ruby",
-    "java",
-    "net",
-    "scala",
-    "c",
-    "mobile",
-    "testing",
-    "devops",
-    "admin",
-    "ux",
-    "pm",
+    # "javascript",
+    # "html",
+    # "php",
+    # "ruby",
+    # "java",
+    # "net",
+    # "scala",
+    # "c",
+    # "mobile",
+    # "testing",
+    # "devops",
+    # "admin",
+    # "ux",
+    # "pm",
     "game",
-    "analytics",
-    "security",
-    "data",
-    "go",
-    "support",
-    "erp",
-    "architecture",
-    "other",
+    # "analytics",
+    # "security",
+    # "data",
+    # "go",
+    # "support",
+    # "erp",
+    # "architecture",
+    # "other",
 ]
 
 
@@ -46,14 +47,15 @@ class GetJustJoinITContent(GetContentStrategy):
         )
         self.category = category
         self.pixels_to_scroll = "500"
-        self.driver = webdriver.Chrome()
+        service = Service(executable_path="chromedriver.exe")
+        self.driver = webdriver.Chrome(service=service)
         self.driver.get(self.base_url)
 
     def fetch_content(self) -> None:
         try:
             last_height = 0
             while True:
-                elements = self.driver.find_elements(By.CLASS_NAME, "css-gpb9dg")
+                elements = self.driver.find_elements(By.CLASS_NAME, "css-2crog7")
                 if elements:
                     for element in elements:
                         self.data.append(element.get_attribute("outerHTML"))

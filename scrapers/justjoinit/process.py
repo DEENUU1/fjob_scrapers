@@ -1,7 +1,7 @@
 from ..strategy_abstract.process import Process
 from typing import List, Optional, Tuple
 from bs4 import BeautifulSoup
-from ...scraper import (
+from scraper import (
     ParsedOffer,
     ParsedSalary,
     ParsedWebsite,
@@ -18,15 +18,18 @@ class JJITProcess(Process):
     def parse_html(self, html: Optional[str]) -> None:
         soup = BeautifulSoup(html, "html.parser")
 
-        title_element = soup.find("h2", class_="css-16gpjqw")
+        if not soup:
+            return
+
+        title_element = soup.find("h2", class_="css-xd8l4l")
         url_element = soup.find("a", class_="css-4lqp8g")
-        salary_element = soup.find("div", class_="css-1qaewdq")
-        skill_elements = soup.find_all("div", class_="css-1am4i4o")
+        salary_element = soup.find("div", class_="css-1b2ga3v")
+        skill_elements = soup.find_all("div", class_="css-1u7edaj")
         skills = [skill.text for skill in skill_elements]
-        localization_element = soup.find("div", class_="css-h3r3z8")
-        company_logo_div = soup.find("div", class_="css-xlz5cy")
+        localization_element = soup.find("div", class_="css-68pppj")
+        company_logo_div = soup.find("div", class_="css-1hudrbb")
         company_logo = company_logo_div.find("img")
-        company_name_div = soup.find("div", class_="css-fmb6qw")
+        company_name_div = soup.find("div", class_="css-ldh1c9")
         company_name = company_name_div.find("span")
 
         if title_element:
@@ -48,7 +51,7 @@ class JJITProcess(Process):
     def process_salary(salary: str) -> Tuple[Optional[int], Optional[int]]:
         if "Undisclosed" in salary:
             return None, None
-        salary = salary.replace("PLN", "")
+        salary = salary.replace("pln", "")
 
         if "-" in salary:
             text = salary.split("-")
@@ -60,16 +63,23 @@ class JJITProcess(Process):
     @staticmethod
     def process_skills(skills: List[str]) -> List[str]:
         to_delete = ["New", "Fully remote"]
+        if not skills:
+            return []
         return [element for element in skills if element not in to_delete]
 
     @staticmethod
     def is_remote(skills: List[str], title: str) -> bool:
+        if not title:
+            return False
+
         if "remote" in skills or "remote" in title.lower():
             return True
         return False
 
     @staticmethod
     def is_hybrid(title: str) -> bool:
+        if not title:
+            return False
         if "hybrid" in title.lower():
             return True
         return False

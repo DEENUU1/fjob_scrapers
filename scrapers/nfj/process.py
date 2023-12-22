@@ -1,7 +1,7 @@
 from ..strategy_abstract.process import Process
 from typing import List, Optional, Tuple
 from bs4 import BeautifulSoup
-from ...scraper import (
+from scraper import (
     ParsedOffer,
     ParsedSalary,
     ParsedWebsite,
