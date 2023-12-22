@@ -1,12 +1,11 @@
-import logging
-
 # from .models import PageContent
 from scrapers.justjoinit import (
     get_content as get_content_justjoinit,
     process as process_justjoinit,
 )
 from scrapers.justjoinit.get_content import CATEGORIES
-from scrapers.nfj import get_content as get_content_nfj, process as process_nfj
+
+
 # from .scrapers.olx import get_content as get_content_olx, process as process_olx
 # from .scrapers.pracapl import (
 #     get_content as get_content_pracapl,
@@ -21,12 +20,24 @@ from scrapers.nfj import get_content as get_content_nfj, process as process_nfj
 #     process as process_the_protocol,
 # )
 
-logging.basicConfig(
-    filename="../logs.log",
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
 
+def run_justjoinit():
+    try:
+        for cat in CATEGORIES:
+            scraper = get_content_justjoinit.GetJustJoinITContent(cat)
+            scraper.fetch_content()
+
+            for content in scraper.data:
+                process = process_justjoinit.JJITProcess()
+                process.parse_html(content)
+                processed_data = process.process()
+                print(processed_data)
+
+    except Exception as e:
+        print(e)
+
+
+run_justjoinit()
 
 # def run_the_protocol():
 #     try:
@@ -53,22 +64,6 @@ logging.basicConfig(
 #         logging.error(f"Failed to run the protocol scraper: {e}")
 
 
-def run_justjoinit():
-    # try:
-    for cat in CATEGORIES:
-        scraper = get_content_justjoinit.GetJustJoinITContent(cat)
-        scraper.fetch_content()
-
-        for content in scraper.data:
-            process = process_justjoinit.JJITProcess()
-            process.parse_html(content)
-            processed_data = process.process()
-            print(processed_data)
-
-    # except Exception as e:
-    #     print(e)
-run_justjoinit()
-
 # def run_nfj():
 #     try:
 #         scraper = get_content_nfj.GetNFJContent()
@@ -93,7 +88,6 @@ run_justjoinit()
 #     except Exception as e:
 #         print(e)
 #         logging.error(f"Failed to run nfj scraper: {e}")
-
 
 
 # def run_pracapl():

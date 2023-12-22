@@ -16,7 +16,7 @@ class EmploymentType:
 
 @dataclass
 class Experience:
-    name = Optional[str] = None
+    name: Optional[str] = None
 
 
 @dataclass
@@ -39,7 +39,7 @@ class Addresses:
 class ParsedOffer:
     title: Optional[str] = None
     description: Optional[str] = None
-    addresses: Optional[str] = None
+    addresses: Optional[List[Addresses]] = None
     is_remote: Optional[bool] = False
     is_hybrid: Optional[bool] = False
     apply_form: Optional[str] = None
@@ -49,7 +49,7 @@ class ParsedOffer:
     work_type: Optional[List[WorkType]] = None
     employment_type: Optional[List[EmploymentType]] = None
     company_logo: Optional[str] = None
-    url = Optional[str] = None
+    url: Optional[str] = None
     company_name: Optional[str] = None
 
 

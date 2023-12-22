@@ -3,10 +3,9 @@ from typing import List, Optional, Tuple
 from bs4 import BeautifulSoup
 from scraper import (
     ParsedOffer,
-    ParsedSalary,
-    ParsedWebsite,
-    ParsedLocalization,
-    ParsedExperienceLevel,
+    Salary,
+    Experience,
+    Addresses
 )
 
 
@@ -107,31 +106,29 @@ class JJITProcess(Process):
         is_hybrid = self.is_hybrid(title)
         processed_skills = self.process_skills(skills)
         processed_localization = self.process_localization(localization)
-        currency = self.get_currency(salary)
         experiences = self.get_experience_level(title)
-        website = ParsedWebsite(name="JustJoinIT", url="https://justjoin.it/")
-        localization = ParsedLocalization(city=processed_localization)
+        localization = Addresses(city=processed_localization)
         experiences_obj = []
         for exp in experiences:
-            experiences_obj.append(ParsedExperienceLevel(name=exp))
-        salary = ParsedSalary(
+            experiences_obj.append(Experience(name=exp))
+        salary = Salary(
             salary_from=salary_from,
             salary_to=salary_to,
-            currency=currency,
-            salary_schedule=1,
-            type=2,
+            currency="PLN",
+            schedule="MONTHLY",
         )
         offer = ParsedOffer(
             title=title,
-            url=f"https://justjoin.it{url}",
-            skills=processed_skills,
-            company_logo=company_logo,
-            company_name=company_name,
+            addresses=[localization],
             is_remote=is_remote,
             is_hybrid=is_hybrid,
-            experience_level=experiences_obj,
+            apply_form=f"https://justjoin.it{url}",
+            skills=processed_skills,
             salary=[salary],
-            website=website,
-            localizations=[localization],
+            experience=experiences_obj,
+            company_logo=company_logo,
+            url=f"https://justjoin.it{url}",
+            company_name=company_name,
+
         )
         return offer
