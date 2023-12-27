@@ -1,6 +1,5 @@
-import json
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from typing import Dict, List, Optional, Any
 
 
@@ -42,8 +41,7 @@ class ParsedOffer:
     addresses: Optional[List[Addresses]] = None
     is_remote: Optional[bool] = False
     is_hybrid: Optional[bool] = False
-    apply_form: Optional[str] = None
-    skills: Optional[List[str]] = None
+    skills: Optional[str] = None
     salary: Optional[List[Salary]] = None
     experience: Optional[List[Experience]] = None
     work_type: Optional[List[WorkType]] = None
@@ -58,16 +56,6 @@ class Scraper(ABC):
         self.url = url
         self.search = search
 
-    @staticmethod
-    def save_to_json(data: List[Optional[ParsedOffer]], filename: str) -> None:
-        offers_data = []
-        for offer in data:
-            offer_data = asdict(offer)
-            offers_data.append(offer_data)
-
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(offers_data, f, ensure_ascii=False, indent=4)
-
     @abstractmethod
     def fetch_data(self):
         pass
@@ -75,12 +63,3 @@ class Scraper(ABC):
     @abstractmethod
     def parse_offer(self, data):
         pass
-
-    @staticmethod
-    def return_parsed_data(parsed_data: List[ParsedOffer]) -> List[Dict[str, Any]]:
-        return [offer.__dict__ for offer in parsed_data]
-
-    @staticmethod
-    def save_data(parsed_offers: List[ParsedOffer]) -> None:
-        for parsed_offer in parsed_offers:
-            print(parsed_offer)

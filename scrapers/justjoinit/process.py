@@ -20,7 +20,7 @@ class JJITProcess(Process):
         if not soup:
             return
 
-        title_element = soup.find("h2", class_="css-xd8l4l")
+        title_element = soup.find("h2", class_="css-16gpjqw")
         url_element = soup.find("a", class_="css-4lqp8g")
         salary_element = soup.find("div", class_="css-1b2ga3v")
         skill_elements = soup.find_all("div", class_="css-1u7edaj")
@@ -60,18 +60,22 @@ class JJITProcess(Process):
             return int(salary.replace(" ", "")), None
 
     @staticmethod
-    def process_skills(skills: List[str]) -> List[str]:
+    def process_skills(skills: List[str]) -> Optional[str]:
         to_delete = ["New", "Fully remote"]
         if not skills:
-            return []
-        return [element for element in skills if element not in to_delete]
+            return None
+        skills = [element for element in skills if element not in to_delete]
+        return " ".join(skills)
 
     @staticmethod
     def is_remote(skills: List[str], title: str) -> bool:
         if not title:
             return False
 
-        if "remote" in skills or "remote" in title.lower():
+        if skills:
+            if "remote" in skills:
+                return True
+        if "remote" in title.lower():
             return True
         return False
 
@@ -119,13 +123,15 @@ class JJITProcess(Process):
         )
         offer = ParsedOffer(
             title=title,
+            description=None,
             addresses=[localization],
             is_remote=is_remote,
             is_hybrid=is_hybrid,
-            apply_form=f"https://justjoin.it{url}",
             skills=processed_skills,
             salary=[salary],
-            experience=experiences_obj,
+            experience=[], # This doesnt work
+            work_type=None,
+            employment_type=None,
             company_logo=company_logo,
             url=f"https://justjoin.it{url}",
             company_name=company_name,
