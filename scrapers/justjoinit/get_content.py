@@ -1,16 +1,8 @@
 from ..strategy_abstract.get_content import GetContentStrategy
-import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
-from selenium.webdriver.chrome.service import Service
 
-
-logging.basicConfig(
-    filename="../logs.log",
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
 
 CATEGORIES = [
     # "javascript",
@@ -42,13 +34,11 @@ CATEGORIES = [
 class GetJustJoinITContent(GetContentStrategy):
     def __init__(self, category: str):
         super().__init__(
-            website="JustJoinIT",
             base_url=f"https://justjoin.it/all-locations/{category}",
         )
         self.category = category
         self.pixels_to_scroll = "500"
-        service = Service(executable_path="chromedriver.exe")
-        self.driver = webdriver.Chrome(service=service)
+        self.driver = webdriver.Chrome(service=self.service)
         self.driver.get(self.base_url)
 
     def fetch_content(self) -> None:
@@ -68,7 +58,14 @@ class GetJustJoinITContent(GetContentStrategy):
                 if new_height == last_height:
                     break
                 last_height = new_height
-                logging.info(f"Fetched content from {self.website} - {self.base_url}")
+                print(f"Fetched content from {self.base_url}")
 
         except Exception as e:
-            logging.error(f"Error while fetching content from {self.website}")
+            print(e)
+
+
+def scrape_jjit(category: str):
+    scraper = GetJustJoinITContent(category)
+    scraper.fetch_content()
+    return scraper.data
+

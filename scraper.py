@@ -1,6 +1,5 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Any
+from typing import List, Optional
 
 
 @dataclass
@@ -50,16 +49,3 @@ class ParsedOffer:
     url: Optional[str] = None
     company_name: Optional[str] = None
 
-
-class Scraper(ABC):
-    def __init__(self, url: str, search: Dict[str, str] = None):
-        self.url = url
-        self.search = search
-
-    @abstractmethod
-    def fetch_data(self):
-        pass
-
-    @abstractmethod
-    def parse_offer(self, data):
-        pass

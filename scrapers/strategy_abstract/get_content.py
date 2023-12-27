@@ -1,20 +1,15 @@
 from abc import abstractmethod, ABC
+from selenium.webdriver.chrome.service import Service
+
+
+SERVICE = Service(executable_path="chromedriver.exe")
 
 
 class GetContentStrategy(ABC):
-    """
-    Abstract base class for retrieving and saving content.
-
-    Methods:
-    - fetch_content: Retrieves the content.
-    - save_to_db: Saves the content to a database.
-    - __len__: Returns the length of the content.
-    """
-
-    def __init__(self, website: str, base_url: str):
+    def __init__(self, base_url: str):
         self.data = []
-        self.website = website
         self.base_url = base_url
+        self.service = SERVICE
 
     @abstractmethod
     def fetch_content(self):
