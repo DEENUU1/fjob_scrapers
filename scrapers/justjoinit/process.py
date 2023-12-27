@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 from scraper import (
     ParsedOffer,
     Salary,
-    Experience,
     Addresses
 )
 
@@ -68,26 +67,6 @@ class JJITProcess(Process):
         return " ".join(skills)
 
     @staticmethod
-    def is_remote(skills: List[str], title: str) -> bool:
-        if not title:
-            return False
-
-        if skills:
-            if "remote" in skills:
-                return True
-        if "remote" in title.lower():
-            return True
-        return False
-
-    @staticmethod
-    def is_hybrid(title: str) -> bool:
-        if not title:
-            return False
-        if "hybrid" in title.lower():
-            return True
-        return False
-
-    @staticmethod
     def process_localization(localization: Optional[str]) -> Optional[str]:
         if not localization:
             return None
@@ -105,9 +84,11 @@ class JJITProcess(Process):
         company_logo = self.parsed_data.get("company_logo")
         company_name = self.parsed_data.get("company_name")
 
+        text_to_process = f"{title} {skills}"
+
         salary_from, salary_to = self.process_salary(salary)
-        is_remote = self.is_remote(skills, title)
-        is_hybrid = self.is_hybrid(title)
+        is_remote = self.is_remote(text_to_process)
+        is_hybrid = self.is_hybrid(text_to_process)
         processed_skills = self.process_skills(skills)
         processed_localization = self.process_localization(localization)
         experiences = self.get_experience_level(title)

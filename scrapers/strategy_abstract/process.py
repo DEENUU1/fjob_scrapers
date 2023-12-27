@@ -35,6 +35,20 @@ class Process(ABC):
                 return occurrence
 
     @staticmethod
+    def is_hybrid(text: str) -> bool:
+        text.lower()
+        if "hybrid" in text or "hybrydowa" in text:
+            return True
+        return False
+
+    @staticmethod
+    def is_remote(text: str) -> bool:
+        text.lower()
+        if "remote" in text or "zdalnie" in text:
+            return True
+        return False
+
+    @staticmethod
     def get_experience_level(text: str) -> List[Optional[str]]:
         result = []
         if not text:
