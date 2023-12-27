@@ -112,9 +112,7 @@ class JJITProcess(Process):
         processed_localization = self.process_localization(localization)
         experiences = self.get_experience_level(title)
         localization = Addresses(city=processed_localization)
-        experiences_obj = []
-        for exp in experiences:
-            experiences_obj.append(Experience(name=exp))
+
         salary = Salary(
             salary_from=salary_from,
             salary_to=salary_to,
@@ -129,7 +127,7 @@ class JJITProcess(Process):
             is_hybrid=is_hybrid,
             skills=processed_skills,
             salary=[salary],
-            experience=[], # This doesnt work
+            experience=experiences,
             work_type=None,
             employment_type=None,
             company_logo=company_logo,
