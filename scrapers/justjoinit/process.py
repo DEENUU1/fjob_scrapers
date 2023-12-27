@@ -13,6 +13,7 @@ class JJITProcess(Process):
     def __init__(self, html):
         super().__init__()
         self.html = html
+        self.scraped_data = None
         self.parsed_data = {}
         self.parse_html()
         self.process()
@@ -121,4 +122,4 @@ class JJITProcess(Process):
             company_name=company_name,
 
         )
-        return asdict(offer)
+        self.scraped_data = asdict(offer)
