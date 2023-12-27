@@ -1,20 +1,24 @@
 from ..strategy_abstract.process import Process
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Dict
 from bs4 import BeautifulSoup
 from scraper import (
     ParsedOffer,
     Salary,
     Addresses
 )
+from dataclasses import asdict
 
 
 class JJITProcess(Process):
-    def __init__(self):
+    def __init__(self, html):
         super().__init__()
+        self.html = html
         self.parsed_data = {}
+        self.parse_html()
+        self.process()
 
-    def parse_html(self, html: Optional[str]) -> None:
-        soup = BeautifulSoup(html, "html.parser")
+    def parse_html(self) -> None:
+        soup = BeautifulSoup(self.html, "html.parser")
 
         if not soup:
             return
@@ -75,7 +79,7 @@ class JJITProcess(Process):
         else:
             return localization
 
-    def process(self) -> ParsedOffer:
+    def process(self) -> Dict:
         title = self.parsed_data.get("title")
         url = self.parsed_data.get("url")
         salary = self.parsed_data.get("salary")
@@ -94,6 +98,7 @@ class JJITProcess(Process):
         experiences = self.get_experience_level(title)
         localization = Addresses(city=processed_localization)
 
+        # currency and schedule is hard coded due to the specificity of the website
         salary = Salary(
             salary_from=salary_from,
             salary_to=salary_to,
@@ -116,4 +121,4 @@ class JJITProcess(Process):
             company_name=company_name,
 
         )
-        return offer
+        return asdict(offer)

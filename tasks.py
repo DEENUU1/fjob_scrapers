@@ -1,5 +1,4 @@
 import json
-from dataclasses import asdict
 
 import requests
 
@@ -18,10 +17,9 @@ def run_jjit():
             scraped_data = scrape_jjit(category=cat)
 
             for content in scraped_data:
-                process = process_justjoinit.JJITProcess()
-                process.parse_html(content)
-                processed_data = process.process()
-                parsed_data.append(asdict(processed_data))
+                process = process_justjoinit.JJITProcess(html=content)
+                parsed_data.append(process)
+
     except:
         pass
 

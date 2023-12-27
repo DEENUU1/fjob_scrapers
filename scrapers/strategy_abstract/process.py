@@ -1,6 +1,9 @@
 from abc import abstractmethod, ABC
-from typing import List, Optional, Dict, Any
+from typing import List, Optional
+
 from scraper import ParsedOffer
+
+
 # from offers.models import (
 #     Website,
 #     ExperienceLevel,
@@ -10,7 +13,6 @@ from scraper import ParsedOffer
 #     ContractType,
 #     WorkSchedule,
 # )
-from datetime import datetime
 
 
 class Process(ABC):
@@ -18,9 +20,7 @@ class Process(ABC):
         self.processed_data: List[ParsedOffer] = []
 
     @abstractmethod
-    def parse_html(
-        self, html: List[Optional[str]] | Optional[str] | Dict[str, Any]
-    ) -> Dict[str, Any]:
+    def parse_html(self) -> None:
         pass
 
     @abstractmethod
