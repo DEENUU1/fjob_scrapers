@@ -1,8 +1,8 @@
 from abc import abstractmethod, ABC
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
-
-SERVICE = Service(executable_path="./chromedriver")
+SERVICE = Service(executable_path=ChromeDriverManager().install())
 
 
 class GetContentStrategy(ABC):
