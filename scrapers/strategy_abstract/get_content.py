@@ -2,7 +2,7 @@ from abc import abstractmethod, ABC
 from selenium.webdriver.chrome.service import Service
 
 
-SERVICE = Service(executable_path="/var/task/chromedriver.exe")
+SERVICE = Service(executable_path="./chromedriver")
 
 
 class GetContentStrategy(ABC):
