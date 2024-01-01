@@ -1,10 +1,11 @@
 from abc import abstractmethod, ABC
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+import os
 
-
-SERVICE = Service(executable_path="chromedriver")
+os.environ['WDM_LOCAL'] = '1'
+SERVICE = ChromeService(ChromeDriverManager(driver_version="2.26").install())
 CHROME_OPTIONS = Options()
 # CHROME_OPTIONS.add_argument("--headless")
 
