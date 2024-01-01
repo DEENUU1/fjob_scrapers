@@ -12,7 +12,7 @@ phases:
       - cd lib
       - zip -r9 ../deployment_package.zip .
       - cd ..
-      - zip -g deployment_package.zip lambda_function.py
+      - zip -g deployment_package.zip scrapers utils .env __init__.py chromedriver.exe main.py requirements.txt save.py schemas.py tasks.py
   post_build:
     commands:
       - echo "Updating lambda Function..."
