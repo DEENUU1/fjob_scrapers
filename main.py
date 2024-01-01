@@ -8,7 +8,10 @@ def main_handler(event, context):
     if site_id == "jjit":
         run_jjit()
     else:
-        return
+        return {
+            "statusCode": 400,
+            "body": json.dumps(f"Site {site_id} not supported")
+        }
 
     return {
         "statusCode": 200,
