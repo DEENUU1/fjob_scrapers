@@ -22,6 +22,3 @@ def run_jjit():
             print("Data saved successfully")
         else:
             print("Could not send scraped data via API")
-
-
-run_jjit()
