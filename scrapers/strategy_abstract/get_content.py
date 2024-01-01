@@ -1,8 +1,12 @@
 from abc import abstractmethod, ABC
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+
 
 SERVICE = Service(executable_path=ChromeDriverManager().install())
+CHROME_OPTIONS = Options()
+# CHROME_OPTIONS.add_argument("--headless")
 
 
 class GetContentStrategy(ABC):
@@ -10,6 +14,7 @@ class GetContentStrategy(ABC):
         self.data = []
         self.base_url = base_url
         self.service = SERVICE
+        self.options = CHROME_OPTIONS
 
     @abstractmethod
     def fetch_content(self):

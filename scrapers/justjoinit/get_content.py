@@ -38,7 +38,7 @@ class GetJustJoinITContent(GetContentStrategy):
         )
         self.category = category
         self.pixels_to_scroll = "500"
-        self.driver = webdriver.Chrome(service=self.service)
+        self.driver = webdriver.Chrome(service=self.service, options=self.options)
         self.driver.get(self.base_url)
 
     def fetch_content(self) -> None:
