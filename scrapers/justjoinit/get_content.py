@@ -5,6 +5,7 @@ import time
 
 
 CATEGORIES = [
+    "go",
     "javascript",
     "html",
     "php",
@@ -23,7 +24,6 @@ CATEGORIES = [
     "analytics",
     "security",
     "data",
-    "go",
     "support",
     "erp",
     "architecture",
