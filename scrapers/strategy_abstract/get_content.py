@@ -4,7 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
 
-SERVICE = Service(executable_path=ChromeDriverManager(driver_version="2.26").install())
+SERVICE = Service(executable_path="/usr/local/bin/chromedriver")
 CHROME_OPTIONS = Options()
 # CHROME_OPTIONS.add_argument("--headless")
 
