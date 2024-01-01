@@ -2,18 +2,15 @@ import json
 import os
 
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
-
-STATUS = os.getenv("STATUS")
+STATUS = os.environ.get("STATUS")
 
 if STATUS == "prod":
-    BASE_URL = os.getenv("URL_PROD")
-    TOKEN = os.getenv("TOKEN_PROD")
+    BASE_URL = os.environ.get("URL_PROD")
+    TOKEN = os.environ.get("TOKEN_PROD")
 else:
-    BASE_URL = os.getenv("URL_DEV")
-    TOKEN = os.getenv("TOKEN_DEV")
+    BASE_URL = os.environ.get("URL_DEV")
+    TOKEN = os.environ.get("TOKEN_DEV")
 
 
 def save_scraped_data(data) -> bool:
