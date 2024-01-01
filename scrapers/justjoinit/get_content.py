@@ -19,7 +19,7 @@ CATEGORIES = [
     # "admin",
     # "ux",
     # "pm",
-    # "game",
+    "game",
     # "analytics",
     # "security",
     # "data",
@@ -67,5 +67,6 @@ class GetJustJoinITContent(GetContentStrategy):
 def scrape_jjit(category: str):
     scraper = GetJustJoinITContent(category)
     scraper.fetch_content()
+    scraper.driver.quit()
     return scraper.data
 
