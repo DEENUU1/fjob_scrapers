@@ -1,12 +1,26 @@
-import requests
 import json
+import os
+
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+STATUS = os.getenv("STATUS")
+
+if STATUS == "prod":
+    BASE_URL = os.getenv("URL_PROD")
+    TOKEN = os.getenv("TOKEN_PROD")
+else:
+    BASE_URL = os.getenv("URL_DEV")
+    TOKEN = os.getenv("TOKEN_DEV")
 
 
 def save_scraped_data(data) -> bool:
     try:
-        headers = {"Content-Type": "application/json"}
+        headers = {"Content-Type": "application/json", "Authorization": f"Token {TOKEN}"}
         response = requests.post(
-            "http://127.0.0.1:8000/api/offer/scrape/",
+            BASE_URL,
             headers=headers,
             data=json.dumps(data)
         )

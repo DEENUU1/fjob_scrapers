@@ -1,18 +1,7 @@
 from abc import abstractmethod, ABC
 from typing import List, Optional
 
-from scraper import ParsedOffer
-
-
-# from offers.models import (
-#     Website,
-#     ExperienceLevel,
-#     Salaries,
-#     Localization,
-#     Offers,
-#     ContractType,
-#     WorkSchedule,
-# )
+from schemas import ParsedOffer
 
 
 class Process(ABC):
