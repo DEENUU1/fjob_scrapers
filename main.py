@@ -2,7 +2,7 @@ from tasks import run_jjit
 import json
 
 
-def main_handler(event, context):
+def lambda_handler(event, context):
     site_id = event.get("site_id")
 
     if site_id == "jjit":
