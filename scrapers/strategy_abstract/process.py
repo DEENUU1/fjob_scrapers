@@ -10,17 +10,20 @@ class Process(ABC):
 
     @abstractmethod
     def parse_html(self) -> None:
+        """ Abstract method to parse HTML code """
         pass
 
     @abstractmethod
     def process(self) -> ParsedOffer | List[Optional[ParsedOffer]]:
+        """ Abstract method to process data """
         pass
 
     @staticmethod
     def get_currency(text: str) -> Optional[str]:
+        """ Get currency from text """
         currencies = ["PLN", "EUR", "USD"]
         for occurrence in currencies:
-            if occurrence in text:
+            if occurrence.lower() in text.lower():
                 return occurrence
 
     @staticmethod
@@ -46,15 +49,7 @@ class Process(ABC):
         text = text.lower()
 
         data = {
-            "Intern": [
-                "intern",
-                "stażysta",
-                "staż",
-                "praktykant",
-                "stażysta",
-                "praktykant/stażysta",
-                "praktykant / stażysta",
-            ],
+            "Intern": ["intern", "stażysta", "staż", "praktykant", "praktykant/stażysta", "praktykant / stażysta"],
             "Assistant": ["asystent", "asystentka", "assistant"],
             "Junior": ["młodszy", "junior", "młodszy specjalista"],
             "Mid": ["mid", "regular", "specjalista (mid / regular)"],
@@ -65,9 +60,8 @@ class Process(ABC):
         }
 
         for p, f in data.items():
-            for x in f:
-                if x in text and x not in result:
-                    result.append(p)
+            if any(x in text for x in f):
+                result.append(p)
 
         return result
 
@@ -87,9 +81,8 @@ class Process(ABC):
         }
 
         for p, f in data.items():
-            for x in f:
-                if x in text and x not in result:
-                    result.append(p)
+            if any(x in text for x in f):
+                result.append(p)
 
         return result
 
@@ -102,15 +95,13 @@ class Process(ABC):
         text = text.lower()
 
         data = {
-            "Full-time": ["full-time", "full-time", "pełny etat", "pelny etat"],
-            "Part-time": ["part-time", "part-time", "pół etatu", "pol etatu"],
-            "Freelance": ["freelance", "freelance"],
+            "Full-time": ["full-time", "pełny etat", "pelny etat"],
+            "Part-time": ["part-time", "pół etatu", "pol etatu"],
+            "Freelance": ["freelance"],
         }
 
         for p, f in data.items():
-            for x in f:
-                if x in text and x not in result:
-                    result.append(p)
+            if any(x in text for x in f):
+                result.append(p)
 
         return result
-
