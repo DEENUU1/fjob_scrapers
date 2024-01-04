@@ -1,5 +1,5 @@
 from ..strategy_abstract.process import Process
-from typing import List, Optional, Tuple, Dict
+from typing import List, Optional, Tuple
 from bs4 import BeautifulSoup
 from schemas import (
     ParsedOffer,
@@ -80,7 +80,7 @@ class JJITProcess(Process):
         else:
             return localization
 
-    def process(self) -> Dict:
+    def process(self) -> None:
         title = self.parsed_data.get("title")
         url = self.parsed_data.get("url")
         salary = self.parsed_data.get("salary")
@@ -96,7 +96,9 @@ class JJITProcess(Process):
         is_hybrid = self.is_hybrid(text_to_process)
         processed_skills = self.process_skills(skills)
         processed_localization = self.process_localization(localization)
-        experiences = self.get_experience_level(title)
+        experiences = self.get_experience_level(text_to_process)
+        work_type = self.get_work_type(text_to_process)
+        employment_type = self.get_employment_type(text_to_process)
         localization = Addresses(city=processed_localization)
 
         # currency and schedule is hard coded due to the specificity of the website
@@ -115,8 +117,8 @@ class JJITProcess(Process):
             skills=processed_skills,
             salary=[salary],
             experience=experiences,
-            work_type=None,
-            employment_type=None,
+            work_type=work_type,
+            employment_type=employment_type,
             company_logo=company_logo,
             url=f"https://justjoin.it{url}",
             company_name=company_name,

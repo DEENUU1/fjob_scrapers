@@ -55,23 +55,62 @@ class Process(ABC):
                 "praktykant/stażysta",
                 "praktykant / stażysta",
             ],
+            "Assistant": ["asystent", "asystentka", "assistant"],
             "Junior": ["młodszy", "junior", "młodszy specjalista"],
-            "Expert": ["ekspert", "expert"],
-            "Assistant": ["asystent", "asystentka"],
             "Mid": ["mid", "regular", "specjalista (mid / regular)"],
             "Senior": ["senior", "starszy"],
-            "Lead": ["lead", "kierownik", "kierownik/koordynator", "koordynator"],
-            "Director": ["dyrektor", "director"],
+            "C-level": ["c-level", "clevel"],
+            "Expert": ["expert", "ekspert"],
             "Manager": ["manager", "menadżer"],
-            "Worker": ["pracownik fizyczny", "worker"],
-            "CEO": [
-                "prezes",
-            ],
         }
 
         for p, f in data.items():
             for x in f:
-                if x in text:
+                if x in text and x not in result:
                     result.append(p)
 
         return result
+
+    @staticmethod
+    def get_employment_type(text: str) -> List[Optional[str]]:
+        result = []
+        if not text:
+            return result
+
+        text = text.lower()
+
+        data = {
+            "B2B": ["B2B", "contract", "kontrakt"],
+            "Permanent": ["umowa o pracę", "umowa o prace"],
+            "Mandate contact": [],
+            "Specific-task contact": ["umowa o dzieło", "umowa o dzielo"]
+        }
+
+        for p, f in data.items():
+            for x in f:
+                if x in text and x not in result:
+                    result.append(p)
+
+        return result
+
+    @staticmethod
+    def get_work_type(text: str) -> List[Optional[str]]:
+        result = []
+        if not text:
+            return result
+
+        text = text.lower()
+
+        data = {
+            "Full-time": ["full-time", "full-time", "pełny etat", "pelny etat"],
+            "Part-time": ["part-time", "part-time", "pół etatu", "pol etatu"],
+            "Freelance": ["freelance", "freelance"],
+        }
+
+        for p, f in data.items():
+            for x in f:
+                if x in text and x not in result:
+                    result.append(p)
+
+        return result
+
