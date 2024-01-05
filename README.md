@@ -17,9 +17,9 @@
     FJob is a fullstack application (main technologies: Django Rest Framework, Nextjs, Selenium). FJob, by collecting job offers from many job portals (currently only JustJoinIT, but there are already scripts ready to collect data from: olx, Pracujpl, nofluffjobs, Pracujpl) and enabling companies to post their own job offers will allow you to easily search for job offers.
     <br />
     <br />
-    <a href="https://github.com/DEENUU1/fjob_backend/issues">Report Bug</a>
+    <a href="https://github.com/DEENUU1/fjob_scrapers/issues">Report Bug</a>
     ·
-    <a href="https://github.com/DEENUU1/fjob_backend/issues">Request Feature</a>
+    <a href="https://github.com/DEENUU1/fjob_scrapers/issues">Request Feature</a>
   </p>
 </div>
 
@@ -244,32 +244,32 @@ See `LICENSE.txt` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/DEENUU1/fjob_backend.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/DEENUU1/fjob_scrapers.svg?style=for-the-badge
 
-[contributors-url]: https://github.com/DEENUU1/fjob_backend/graphs/contributors
+[contributors-url]: https://github.com/DEENUU1/fjob_scrapers/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/DEENUU1/fjob_backend.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/DEENUU1/fjob_scrapers.svg?style=for-the-badge
 
-[forks-url]: https://github.com/DEENUU1/fjob_backend/network/members
+[forks-url]: https://github.com/DEENUU1/fjob_scrapers/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/DEENUU1/fjob_backend.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/DEENUU1/fjob_scrapers.svg?style=for-the-badge
 
-[stars-url]: https://github.com/DEENUU1/fjob_backend/stargazers
+[stars-url]: https://github.com/DEENUU1/fjob_scrapers/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/DEENUU1/fjob_backend.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/DEENUU1/fjob_scrapers.svg?style=for-the-badge
 
-[issues-url]: https://github.com/DEENUU1/fjob_backend/issues
+[issues-url]: https://github.com/DEENUU1/fjob_scrapers/issues
 
-[license-shield]: https://img.shields.io/github/license/DEENUU1/fjob_backend.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/DEENUU1/fjob_scrapers.svg?style=for-the-badge
 
-[license-url]: https://github.com/DEENUU1/fjob_backend/blob/master/LICENSE.txt
+[license-url]: https://github.com/DEENUU1/fjob_scrapers/blob/master/LICENSE.txt
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 
 [linkedin-url]: https://linkedin.com/in/kacper-wlodarczyk
 
-[basic]: https://github.com/DEENUU1/fjob_backend/blob/main/assets/v1_2/basic.gif?raw=true
+[basic]: https://github.com/DEENUU1/fjob_scrapers/blob/main/assets/v1_2/basic.gif?raw=true
 
-[full]: https://github.com/DEENUU1/fjob_backend/blob/main/assets/v1_2/full.gif?raw=true
+[full]: https://github.com/DEENUU1/fjob_scrapers/blob/main/assets/v1_2/full.gif?raw=true
 
-[search]: https://github.com/DEENUU1/fjob_backend/blob/main/assets/v1_2/search.gif?raw=true
+[search]: https://github.com/DEENUU1/fjob_scrapers/blob/main/assets/v1_2/search.gif?raw=true
