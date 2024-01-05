@@ -1,8 +1,10 @@
-from ..strategy_abstract.get_content import GetContentStrategy
+import time
+from typing import List, Optional
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
 
+from ..strategy_abstract.get_content import GetContentStrategy
 
 CATEGORIES = [
     "go",
@@ -64,9 +66,10 @@ class GetJustJoinITContent(GetContentStrategy):
             print(e)
 
 
-def scrape_jjit(category: str):
+def scrape_jjit(
+        category: str
+) -> List[Optional[str]]:
     scraper = GetJustJoinITContent(category)
     scraper.fetch_content()
     scraper.driver.quit()
     return scraper.data
-
