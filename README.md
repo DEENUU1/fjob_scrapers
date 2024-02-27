@@ -23,6 +23,21 @@
   </p>
 </div>
 
+## !Info!
+<strong>
+The project has undergone significant changes in terms of code architecture. 
+Initially, all application logic resided in views. 
+Currently, thanks to the use of Repository Pattern and Service Layer, 
+views have been significantly improved. 
+Not all views use this architecture, 
+I left some of them unchanged because they use abstract classes from DRF, 
+so there is practically no business logic in them.
+</strong>
+<hr>
+<strong>
+The application is no longer available in the demo version, I don't have money to maintain it with this architecture :(
+</strong>
+
 ## System Architecture
 
 Fjob consists of 3 repositories:
@@ -36,6 +51,9 @@ Fjob consists of 3 repositories:
 
 
 ## Features
+
+<strong>!NEW! I started refactoring the current application and moved a large part of the code initially saved in views to the service layer using the repository pattern.
+Some views have remained unchanged due to, for example, their simplicity related to the use of Django </strong>
 
 1. <strong>JWT and OAuth Google</strong> Integration:
    - Utilizes JSON Web Tokens (JWT) in conjunction with OAuth Google for secure authentication and authorization processes.
@@ -80,42 +98,46 @@ Fjob consists of 3 repositories:
     - Implements AWS EventBridge to automatically trigger each web scraping function.
 17. Sentry Integration for Error Monitoring:
     - Integrates with the Sentry platform to monitor and analyze errors in the system.
-
+18. I wrote over <strong>120 tests</strong>, both unit and integration
 
 ## Technologies:
-
-#### Backend
-
 - Python
-    - Django
-    - Django Rest Framework
+    - Django / Django Rest Framework
+    - Selenium
     - Celery
-    - Docker
-    - Docker Compose
     - Pytest
+    - Requests
+    - Beautiful Soup 4
+- React 
+  - Next.JS
+  - Typescript
+- AWS 
+  - EC2
+  - S3 Bucket
+  - Elastic IP
+  - Route 53
+  - Lambda
+  - EventBridge
+  - CodeBuild
+  - Amplify
+- Google Cloud SQL (postgreSQL)
+- Docker
+- Docker Compose
 - Redis
 - CI/CD
-- AWS EC2
-- AWS S3 Bucket
-- AWS Elastic IP
-- AWS Route 53
 - Certbot
 - NGINX
-- Google Cloud SQL (postgre)
 - SQLite
 - Stripe
 
-
+## Backend - Endpoints
 <img src="assets/api_1.png" alt="endpoints_1"/>
 <img src="assets/api_2.png" alt="endpoints_2"/>
 <img src="assets/api_3.png" alt="endpoints_3"/>
 
 
-#### Frontend
-
-- Nextjs
-- Typescript
-- AWS Amplify
+## Frontend
+I'm not a frontend developer, but I think it looks pretty good
 
 <img src="assets/frontend_1.png" alt="frontend_1"/>
 <img src="assets/frontend_2.png" alt="frontend_2"/>
@@ -138,16 +160,6 @@ Fjob consists of 3 repositories:
 <img src="assets/dashboard_4.png" alt="frontend_12"/>
 <img src="assets/frontend_14.png" alt="frontend_14"/>
 <img src="assets/frontend_15.png" alt="frontend_15"/>
-
-#### Scrapers
-
-- Python
-    - Selenium
-    - Requests
-    - Beautiful Soup 4
-- AWS Lambda
-- AWS EventBridge
-- AWS CodeBuild
 
 ## Local environment installation
 
